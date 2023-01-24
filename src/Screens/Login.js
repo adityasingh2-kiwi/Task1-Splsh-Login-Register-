@@ -6,11 +6,11 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import COLORS from '../component/colors';
 
 const Login = ({navigation}) => {
-  // const [inputBoxValue, setInputBoxValue] = useState('');
   const [email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const [checkValidEmail, setCheckValidEmail] = useState(false);
@@ -24,10 +24,14 @@ const Login = ({navigation}) => {
     }
   };
   const Login1 = () => {
-    navigation.navigate('Home', {
-      Email: email,
-      Password: Password,
-    });
+    if (email !== '' && Password !== '') {
+      navigation.navigate('Home', {
+        Email: email,
+        Password: Password,
+      });
+    } else {
+      Alert.alert('Please enter all details');
+    }
   };
 
   return (

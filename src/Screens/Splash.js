@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import Logo from '../assets/Image/1528443245244.jpeg';
-const Splash = ({naviagtion}) => {
+const Splash = () => {
   return (
     <View style={styles.container}>
       <Image source={Logo} style={styles.logo} />

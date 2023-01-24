@@ -21,7 +21,7 @@ const COLORS = StyleSheet.create({
     light: 'light',
     darkBlue: 'darkblue',
     red: 'red',
-    backgroundColor: 'pink',
+    backgroundColor: 'white',
   },
 
   register1: {
@@ -58,7 +58,6 @@ const COLORS = StyleSheet.create({
     borderWidth: 1,
     // borderRadius: 20,
     height: 60,
-    marginTop: 15,
   },
 
   button: {
@@ -75,5 +74,4 @@ const COLORS = StyleSheet.create({
   },
 });
 
-// const TEXT = StyleSheet.create({});
 export default COLORS;
