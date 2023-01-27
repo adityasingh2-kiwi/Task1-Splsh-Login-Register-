@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 import COLORS from '../component/colors';
 import {useDispatch} from 'react-redux';
-import {getUser} from '../redux/action/GetUser';
-import {useSelector} from 'react-redux';
+// import {getUser} from '../redux/action/GetUser';
+// import {useSelector} from 'react-redux';
 const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -66,20 +66,24 @@ const Login = () => {
             onChangeText={text => handleCheckEmail(text)}
           />
           {checkValidEmail ? (
-            <Text style={{color: 'red'}}>Wrong Formate email</Text>
+            <Text style={{color: 'red', marginLeft: 30, marginTop: 10}}>
+              Wrong Formate email
+            </Text>
           ) : (
             <Text> </Text>
           )}
           <Text style={COLORS.login3}>Password</Text>
           <TextInput
-            placeholder="Enter your Password"
             style={COLORS.TextColor1}
+            placeholder="Enter your Password"
             value={password}
             secureTextEntry
             onChangeText={text => setPassword(text)}
           />
           <TouchableOpacity style={COLORS.button} onPress={Login1}>
-            <Text>Login</Text>
+            <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>
+              Login
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('RegistrationScreen')}>

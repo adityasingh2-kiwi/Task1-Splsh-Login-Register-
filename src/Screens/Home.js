@@ -6,7 +6,13 @@ const Home = ({navigation, route}) => {
   console.log(route);
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
-      <Text style={{fontSize: 40, textAlign: 'center', marginTop: 300}}>
+      <Text
+        style={{
+          fontSize: 40,
+          textAlign: 'center',
+          marginTop: 150,
+          marginBottom: 70,
+        }}>
         Welcome to Home Page
       </Text>
       <Text>FirstName : {route?.params?.firstName}</Text>
@@ -15,11 +21,14 @@ const Home = ({navigation, route}) => {
       <Text>Password : {route?.params?.password}</Text>
       <Text>MobileNumber : {route?.params?.mobileNumber}</Text>
       <TouchableOpacity>
-        <Text onPress={() => navigation.navigate('Login')}
+        <Text
+          onPress={() => navigation.navigate('Login')}
           style={{
             textAlign: 'center',
-            marginTop: 25,
-            backgroundColor: 'pink',
+            marginTop: 70,
+            backgroundColor: 'magenta',
+            color: 'white',
+            fontWeight: 'bold',
             width: 90,
             height: 30,
             fontSize: 20,

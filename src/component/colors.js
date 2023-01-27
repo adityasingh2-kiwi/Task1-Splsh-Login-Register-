@@ -9,7 +9,9 @@ const COLORS = StyleSheet.create({
     paddingHorizontal: 20,
   },
   login3: {
-    fontSize: 30,
+    marginLeft: 30,
+    fontSize: 25,
+    marginBottom: 10,
     marginTop: 30,
   },
   color1: {
@@ -25,6 +27,7 @@ const COLORS = StyleSheet.create({
 
   register1: {
     color: 'black',
+    marginTop: 35,
     fontSize: 40,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -55,8 +58,10 @@ const COLORS = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     borderWidth: 1,
-    // borderRadius: 20,
-    height: 60,
+    marginLeft: 30,
+    height: 40,
+    backgroundColor: 'pink',
+    width: 300,
   },
 
   button: {
@@ -64,7 +69,9 @@ const COLORS = StyleSheet.create({
     backgroundColor: 'gray',
     padding: 10,
     borderRadius: 40,
-    marginTop: 20,
+    marginTop: 40,
+    width: 100,
+    marginLeft: 130,
   },
 
   change: {

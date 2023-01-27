@@ -62,6 +62,7 @@ const RegistrationScreen = ({navigation}) => {
         <View style={COLORS.content1}>
           <TextInputComp
             name="First Name"
+            placeHolder="Enter your First Name"
             value={firstName}
             onChangeText={a => setFirstName(a)}
           />
