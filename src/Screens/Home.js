@@ -1,18 +1,33 @@
 import React from 'react';
-import {useRoute} from '@react-navigation/native';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView, Text, TouchableOpacity} from 'react-native';
 import COLORS from '../component/colors';
 
-const Home = ({naviagtion}) => {
-  const route = useRoute();
-  // console.log('route', route?.params);
+const Home = ({navigation, route}) => {
+  console.log(route);
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
       <Text style={{fontSize: 40, textAlign: 'center', marginTop: 300}}>
         Welcome to Home Page
       </Text>
-      <Text>Email : {route?.params?.Email}</Text>
-      <Text>Password : {route?.params?.Password}</Text>
+      <Text>FirstName : {route?.params?.firstName}</Text>
+      <Text>LastName : {route?.params?.lastName}</Text>
+      <Text>Email : {route?.params?.email}</Text>
+      <Text>Password : {route?.params?.password}</Text>
+      <Text>MobileNumber : {route?.params?.mobileNumber}</Text>
+      <TouchableOpacity>
+        <Text onPress={() => navigation.navigate('Login')}
+          style={{
+            textAlign: 'center',
+            marginTop: 25,
+            backgroundColor: 'pink',
+            width: 90,
+            height: 30,
+            fontSize: 20,
+            marginLeft: 152,
+          }}>
+          LogOut
+        </Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

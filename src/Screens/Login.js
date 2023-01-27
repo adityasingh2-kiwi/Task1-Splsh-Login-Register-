@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   SafeAreaView,
@@ -9,11 +10,18 @@ import {
   Alert,
 } from 'react-native';
 import COLORS from '../component/colors';
-
-const Login = ({navigation}) => {
+import {useDispatch} from 'react-redux';
+import {getUser} from '../redux/action/GetUser';
+import {useSelector} from 'react-redux';
+const Login = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  // const {user} = useSelector(state => state?.getUserReducer);
+  // console.log(user,'useruser');
   const [email, setEmail] = useState('');
-  const [Password, setPassword] = useState('');
+  const [password, setPassword] = useState('');
   const [checkValidEmail, setCheckValidEmail] = useState(false);
+
   const handleCheckEmail = text => {
     let re = /\S+@\S+\.\S+/;
     setEmail(text);
@@ -23,19 +31,29 @@ const Login = ({navigation}) => {
       setCheckValidEmail(true);
     }
   };
+
   const Login1 = () => {
-    if (email !== '' && Password !== '') {
-      navigation.navigate('Home', {
-        Email: email,
-        Password: Password,
-      });
+    console.log(email, password, 'creds');
+    if (email !== '' && password !== '') {
+      // const payload = {
+      //   email: email,
+      //   password: password,
+      // };
+      // navigation.navigate('Bottom', {
+      //   screen: 'Home',
+      //   params: {
+      // email: email,
+      // password: password,
+      //   },
+      // });
+      // dispatch(getUser(payload));
     } else {
       Alert.alert('Please enter all details');
     }
   };
 
   return (
-    <SafeAreaView style={COLORS.Login1}>
+    <SafeAreaView style={COLORS.login1}>
       <ScrollView contentContainerStyle={COLORS.login2}>
         <Text style={COLORS.register1}>Login</Text>
 
@@ -56,7 +74,7 @@ const Login = ({navigation}) => {
           <TextInput
             placeholder="Enter your Password"
             style={COLORS.TextColor1}
-            value={Password}
+            value={password}
             secureTextEntry
             onChangeText={text => setPassword(text)}
           />

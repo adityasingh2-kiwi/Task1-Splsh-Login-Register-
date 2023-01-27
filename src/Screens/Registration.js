@@ -13,12 +13,12 @@ import TextInputComp from '../component/TextInput';
 const RegistrationScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [FirstName, setFirstName] = useState('');
-  const [LastName, setLastName] = useState('');
-  const [Address, setAddress] = useState('');
-  const [ZipCode, setZipCode] = useState('');
-  const [MobileNumber, setMobileNumber] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
   const [checkValidEmail, setCheckValidEmail] = useState(false);
+  console.log(setFirstName, 'setFirstNamesetFirstName');
   const handleCheckEmail = text => {
     let re = /\S+@\S+\.\S+/;
     setEmail(text);
@@ -28,20 +28,23 @@ const RegistrationScreen = ({navigation}) => {
       setCheckValidEmail(true);
     }
   };
-
   const Login1 = () => {
     if (
       email !== '' &&
       password !== '' &&
-      FirstName !== '' &&
-      LastName !== '' &&
-      Address !== '' &&
-      ZipCode !== '' &&
-      MobileNumber !== ''
+      firstName !== '' &&
+      lastName !== '' &&
+      mobileNumber !== ''
     ) {
-      navigation.navigate('Home', {
-        email: email,
-        password: password,
+      navigation.navigate('Bottom', {
+        screen: 'Home',
+        params: {
+          email: email,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          mobileNumber: mobileNumber,
+        },
       });
     } else {
       Alert.alert('Please enter all details');
@@ -59,23 +62,22 @@ const RegistrationScreen = ({navigation}) => {
         <View style={COLORS.content1}>
           <TextInputComp
             name="First Name"
-            placeHolder="Enter your First Name"
-            value={FirstName}
-            onChangeText={e => setFirstName()}
+            value={firstName}
+            onChangeText={a => setFirstName(a)}
           />
           <TextInputComp
             name="Last Name"
             placeHolder="Enter your Last Name"
-            value={LastName}
-            onChangeText={e => setLastName()}
+            value={lastName}
+            onChangeText={e => setLastName(e)}
           />
           <TextInputComp
             name="Email"
             value={email}
             placeHolder="Enter your Email Name"
             onChangeText={text => handleCheckEmail(text)}
-            // value={password}
           />
+          {/* {checkValidEmail && <Text style={{color: 'red'}}>Wrong Formate email</Text>} */}
           {checkValidEmail ? (
             <Text style={{color: 'red'}}>Wrong Formate email</Text>
           ) : (
@@ -85,25 +87,19 @@ const RegistrationScreen = ({navigation}) => {
             value={password}
             name="Password"
             placeHolder="Enter your Password"
-            onChangeText={e => setPassword()}
+            onChangeText={e => setPassword(e)}
           />
           <TextInputComp
-            name="Address"
-            placeHolder="Enter your Address"
-            value={Address}
-            onChangeText={e => setAddress()}
-          />
-          <TextInputComp
-            name="Zip Code"
-            placeHolder="Enter your Zip Code"
-            value={ZipCode}
-            onChangeText={e => setZipCode()}
+            value={confirmPassword}
+            name="ConfirmPassword"
+            placeHolder="Enter your Password"
+            onChangeText={e => setConfirmPassword()}
           />
           <TextInputComp
             name="Mobile Number"
             placeHolder="Enter your Mobile Number"
-            value={MobileNumber}
-            onChangeText={e => setMobileNumber()}
+            value={mobileNumber}
+            onChangeText={e => setMobileNumber(e)}
           />
           <TouchableOpacity onPress={Login1} style={COLORS.button}>
             <Text>Submit</Text>

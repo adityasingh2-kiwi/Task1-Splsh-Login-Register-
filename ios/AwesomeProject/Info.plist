@@ -10,6 +10,12 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	 <key>NSCameraUsageDescription</key>
+  	<string>Please allow for access camera</string>
+	  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Please allow for access gallery</string>
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>Please allow for access gallery</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

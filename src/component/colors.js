@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 
 const COLORS = StyleSheet.create({
   login1: {
-    backgroundColor: 'white',
     flex: 1,
   },
   login2: {
@@ -64,6 +63,7 @@ const COLORS = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'gray',
     padding: 10,
+    borderRadius: 40,
     marginTop: 20,
   },
 
@@ -71,6 +71,13 @@ const COLORS = StyleSheet.create({
     color: 'blue',
     marginTop: 20,
     fontSize: 25,
+  },
+
+  icon: {
+    width: 40,
+    height: 40,
+    // alignContent: 'center',
+    marginLeft: 175,
   },
 });
 

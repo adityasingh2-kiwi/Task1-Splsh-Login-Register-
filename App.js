@@ -1,14 +1,16 @@
 import React from 'react';
 import Nav from './src/Navigation/Nav';
 import {View} from 'react-native';
-import Bottom from './src/Navigation/Bottom';
-
+import {Provider} from 'react-redux';
+import configureStore from './src/redux/Store';
+const store = configureStore();
 const App = () => {
   return (
-    <View style={{flex: 1}}>
-      <Nav />
-      <Bottom />
-    </View>
+    <Provider store={store}>
+      <View style={{flex: 1}}>
+        <Nav />
+      </View>
+    </Provider>
   );
 };
 
