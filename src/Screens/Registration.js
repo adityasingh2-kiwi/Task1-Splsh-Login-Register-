@@ -19,6 +19,7 @@ const RegistrationScreen = ({navigation}) => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [checkValidEmail, setCheckValidEmail] = useState(false);
   console.log(setFirstName, 'setFirstNamesetFirstName');
+
   const handleCheckEmail = text => {
     let re = /\S+@\S+\.\S+/;
     setEmail(text);
@@ -28,6 +29,7 @@ const RegistrationScreen = ({navigation}) => {
       setCheckValidEmail(true);
     }
   };
+
   const Login1 = () => {
     if (
       email !== '' &&

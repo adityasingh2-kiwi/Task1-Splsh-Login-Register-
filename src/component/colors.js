@@ -78,6 +78,7 @@ const COLORS = StyleSheet.create({
     color: 'blue',
     marginTop: 20,
     fontSize: 25,
+    marginLeft: 60,
   },
 
   icon: {

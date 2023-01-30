@@ -11,16 +11,17 @@ import {
 } from 'react-native';
 import COLORS from '../component/colors';
 import {useDispatch} from 'react-redux';
-// import {getUser} from '../redux/action/GetUser';
-// import {useSelector} from 'react-redux';
+import {getUser} from '../redux/action/GetUser';
+import {useSelector} from 'react-redux';
 const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  // const {user} = useSelector(state => state?.getUserReducer);
-  // console.log(user,'useruser');
+  const {user} = useSelector(state => state?.getUserReducer);
+  console.log(user, 'useruser');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checkValidEmail, setCheckValidEmail] = useState(false);
+  const [checkValidPassword, setCheckValidPassword] = useState(false);
 
   const handleCheckEmail = text => {
     let re = /\S+@\S+\.\S+/;
@@ -32,21 +33,31 @@ const Login = () => {
     }
   };
 
+  const handleCheckPassword = text => {
+    let re = /^[a-z+A-Z+0-9+!@#$%^&*]{8,16}$/;
+    setPassword(text);
+    if (re.test(text)) {
+      setCheckValidPassword(false);
+    } else {
+      setCheckValidPassword(true);
+    }
+  };
+
   const Login1 = () => {
     console.log(email, password, 'creds');
     if (email !== '' && password !== '') {
-      // const payload = {
-      //   email: email,
-      //   password: password,
-      // };
-      // navigation.navigate('Bottom', {
-      //   screen: 'Home',
-      //   params: {
-      // email: email,
-      // password: password,
-      //   },
-      // });
-      // dispatch(getUser(payload));
+      const payload = {
+        email: email,
+        password: password,
+      };
+      navigation.navigate('Bottom', {
+        screen: 'Home',
+        params: {
+          email: email,
+          password: password,
+        },
+      });
+      dispatch(getUser(payload));
     } else {
       Alert.alert('Please enter all details');
     }
@@ -78,8 +89,16 @@ const Login = () => {
             placeholder="Enter your Password"
             value={password}
             secureTextEntry
-            onChangeText={text => setPassword(text)}
+            onChangeText={text => handleCheckPassword(text)}
           />
+          {checkValidPassword ? (
+            <Text style={{color: 'red', marginLeft: 30, marginTop: 10}}>
+              Password must contain(Capital Letter,Small Letter, Number,special
+              Character)
+            </Text>
+          ) : (
+            <Text> </Text>
+          )}
           <TouchableOpacity style={COLORS.button} onPress={Login1}>
             <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>
               Login
