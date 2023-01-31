@@ -8,16 +8,16 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  Image,
 } from 'react-native';
 import COLORS from '../component/colors';
 import {useDispatch} from 'react-redux';
 import {getUser} from '../redux/action/GetUser';
-import {useSelector} from 'react-redux';
+// import {app_icon} from '../assets/Image/1528443245244.jpeg';
+// import {useSelector} from 'react-redux';
 const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {user} = useSelector(state => state?.getUserReducer);
-  console.log(user, 'useruser');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checkValidEmail, setCheckValidEmail] = useState(false);
@@ -46,18 +46,12 @@ const Login = () => {
   const Login1 = () => {
     console.log(email, password, 'creds');
     if (email !== '' && password !== '') {
-      const payload = {
+      const data = {
         email: email,
         password: password,
       };
-      navigation.navigate('Bottom', {
-        screen: 'Home',
-        params: {
-          email: email,
-          password: password,
-        },
-      });
-      dispatch(getUser(payload));
+      navigation.navigate('Bottom');
+      dispatch(getUser(data));
     } else {
       Alert.alert('Please enter all details');
     }
@@ -66,6 +60,12 @@ const Login = () => {
   return (
     <SafeAreaView style={COLORS.login1}>
       <ScrollView contentContainerStyle={COLORS.login2}>
+        <Image
+          source={{
+            uri: '/Users/kiwitech/Desktop/Kiwitech/AwesomeProject/src/assets/Image/1528443245244.jpeg',
+          }}
+          style={{width: 80, height: 80, marginLeft: 135}}
+        />
         <Text style={COLORS.register1}>Login</Text>
 
         <View>

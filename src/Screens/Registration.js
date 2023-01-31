@@ -7,18 +7,29 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
 import COLORS from '../component/colors';
 import TextInputComp from '../component/TextInput';
+import {getUser} from '../redux/action/GetUser';
+
+// import {useDispatch} from 'react-redux';
 
 const RegistrationScreen = ({navigation}) => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [checkValidPassword, setCheckValidPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('');
+  const [checkValidFristName, setCheckValidFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [checkValidEmail, setCheckValidEmail] = useState(false);
-  console.log(setFirstName, 'setFirstNamesetFirstName');
+  // console.log(setFirstName, 'setFirstNameFirstName');
+
+  // const handleFirstName =text =>{
+  //   let re =//;
+  // }
 
   const handleCheckEmail = text => {
     let re = /\S+@\S+\.\S+/;
@@ -30,6 +41,16 @@ const RegistrationScreen = ({navigation}) => {
     }
   };
 
+  const handleCheckPassword = text => {
+    let re = /^[a-z+A-Z+0-9+!@#$%^&*]{8,16}$/;
+    setPassword(text);
+    if (re.test(text)) {
+      setCheckValidPassword(false);
+    } else {
+      setCheckValidPassword(true);
+    }
+  };
+
   const Login1 = () => {
     if (
       email !== '' &&
@@ -38,21 +59,19 @@ const RegistrationScreen = ({navigation}) => {
       lastName !== '' &&
       mobileNumber !== ''
     ) {
-      navigation.navigate('Bottom', {
-        screen: 'Home',
-        params: {
-          email: email,
-          password: password,
-          firstName: firstName,
-          lastName: lastName,
-          mobileNumber: mobileNumber,
-        },
-      });
+      const data = {
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        mobileNumber: mobileNumber,
+      };
+      navigation.navigate('Bottom');
+      dispatch(getUser(data));
     } else {
       Alert.alert('Please enter all details');
     }
   };
-
   return (
     <SafeAreaView style={[COLORS.color1, COLORS.register1]}>
       <ScrollView
@@ -66,7 +85,7 @@ const RegistrationScreen = ({navigation}) => {
             name="First Name"
             placeHolder="Enter your First Name"
             value={firstName}
-            onChangeText={a => setFirstName(a)}
+            onChangeText={a => handleFirstName(a)}
           />
           <TextInputComp
             name="Last Name"
@@ -90,8 +109,16 @@ const RegistrationScreen = ({navigation}) => {
             value={password}
             name="Password"
             placeHolder="Enter your Password"
-            onChangeText={e => setPassword(e)}
+            onChangeText={e => handleCheckPassword(e)}
           />
+          {checkValidPassword ? (
+            <Text style={{color: 'red', marginLeft: 30, marginTop: 10}}>
+              Password must contain(Capital Letter,Small Letter, Number,special
+              Character)
+            </Text>
+          ) : (
+            <Text> </Text>
+          )}
           <TextInputComp
             value={confirmPassword}
             name="ConfirmPassword"

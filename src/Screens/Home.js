@@ -1,9 +1,12 @@
 import React from 'react';
 import {SafeAreaView, Text, TouchableOpacity} from 'react-native';
+import {useSelector} from 'react-redux';
 import COLORS from '../component/colors';
 
-const Home = ({navigation, route}) => {
-  console.log(route);
+const Home = ({navigation}) => {
+  // console.log(route);
+
+  const {user} = useSelector(state => state?.getUserReducer);
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
       <Text
@@ -15,11 +18,12 @@ const Home = ({navigation, route}) => {
         }}>
         Welcome to Home Page
       </Text>
-      <Text>FirstName : {route?.params?.firstName}</Text>
-      <Text>LastName : {route?.params?.lastName}</Text>
-      <Text>Email : {route?.params?.email}</Text>
-      <Text>Password : {route?.params?.password}</Text>
-      <Text>MobileNumber : {route?.params?.mobileNumber}</Text>
+      <Text>Email: {user.email}</Text>
+      <Text>Password: {user.password}</Text>
+      <Text>firstName: {user.firstName}</Text>
+      <Text>Last Name: {user.lastName}</Text>
+      <Text>mobileNumber: {user.mobileNumber}</Text>
+
       <TouchableOpacity>
         <Text
           onPress={() => navigation.navigate('Login')}

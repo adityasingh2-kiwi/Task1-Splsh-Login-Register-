@@ -51,6 +51,7 @@ const COLORS = StyleSheet.create({
     color: 'red',
     fontSize: 25,
     fontFamily: 'Cochin',
+    placeholderTextColor: 'white',
   },
   TextColor1: {
     borderColor: 'black',

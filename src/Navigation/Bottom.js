@@ -3,12 +3,14 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../Screens/Home';
 import Favorite from '../Screens/AddUser/Favorite';
 import Profile from '../Screens/AddUser/Profile';
+import UserDetail from '../UserData/UserDetail';
+
 export default function Bottom() {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Favorite" component={Favorite} />
+      <Tab.Screen name="UserDetails" component={UserDetail} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

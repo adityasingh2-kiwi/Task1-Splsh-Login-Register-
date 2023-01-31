@@ -1,11 +1,29 @@
-import {View, Text, TouchableOpacity, Alert, Image} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  Image,
+  ScrollView,
+} from 'react-native';
 import React, {useState} from 'react';
+import {useSelector} from 'react-redux';
 import {askCameraPermission} from '../../utils/askCameraPermission';
 import openCamera from '../../utils/openCamera';
-import {TextInput} from 'react-native-gesture-handler';
+// import {TextInput} from 'react-native-gesture-handler';
+import TextInputComp from '../../component/TextInput';
+import COLORS from '../../component/colors';
 
 const Profile = () => {
+  // const [firstName, setFirstName] = useState('');
   const [picture, setPictures] = useState();
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [lastName, setLastName] = useState('');
+  // const [mobileNumber, setMobileNumber] = useState('');
+
+  const {user} = useSelector(state => state?.getUserReducer);
+
   const cb = image => {
     setPictures(image.path);
   };
@@ -27,101 +45,65 @@ const Profile = () => {
     ]);
   };
   return (
-    <View style={{flex: 1, alignItems: 'center'}}>
-      <Image
-        style={{
-          backgroundColor: 'blue',
-          marginTop: 40,
-          borderRadius: 90,
-          height: 150,
-          width: 150,
-        }}
-        source={{
-          uri:
-            picture === undefined
-              ? 'https://images.unsplash.com/photo-1474314170901-f351b68f544f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80'
-              : picture,
-        }}
-      />
-      <TouchableOpacity
-        style={{
-          backgroundColor: 'pink',
-          marginTop: 25,
-          borderRadius: 30,
-        }}
-        onPress={() => UploadImage()}>
-        <Text style={{fontSize: 20}}>Upload Image</Text>
-      </TouchableOpacity>
-      <View style={{marginTop: 20}}>
-        <Text
+    <ScrollView>
+      <View style={{flex: 1, alignItems: 'center'}}>
+        <Image
           style={{
-            marginRight: 20,
-            fontSize: 20,
-          }}>
-          Name:
-        </Text>
-        <TextInput
-          placeholder="enter the name"
-          style={{
-            fontSize: 20,
-            borderColor: 'black',
-            borderWidth: 1,
-            width: 200,
-            textAlign: 'center',
-            marginTop: 10,
+            backgroundColor: 'blue',
+            marginTop: 40,
+            borderRadius: 90,
+            height: 150,
+            width: 150,
+          }}
+          source={{
+            uri:
+              picture === undefined
+                ? 'https://images.unsplash.com/photo-1474314170901-f351b68f544f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80'
+                : picture,
           }}
         />
-        <Text
+        <TouchableOpacity
           style={{
-            marginTop: 10,
-            marginRight: 20,
-            fontSize: 20,
-          }}>
-          Email:
-        </Text>
-        <TextInput
-          placeholder="enter the Email"
-          style={{
-            fontSize: 20,
-            borderColor: 'black',
-            borderWidth: 1,
-            width: 200,
-            textAlign: 'center',
-            marginTop: 10,
+            backgroundColor: 'pink',
+            marginTop: 25,
+            borderRadius: 30,
           }}
-        />
-        <Text
-          style={{
-            marginTop: 10,
-            marginRight: 20,
-            fontSize: 20,
-          }}>
-          Password:
-        </Text>
-        <TextInput
-          placeholder="enter the password"
-          style={{
-            fontSize: 20,
-            borderColor: 'black',
-            borderWidth: 1,
-            width: 200,
-            textAlign: 'center',
-            marginTop: 10,
-          }}
-        />
-        <TouchableOpacity>
-          <Text
-            style={{marginTop: 30, marginLeft: 20, backgroundColor: 'yellow',width:70, textAlign:'center', fontSize:20}}>
-            Submit
-          </Text>
+          onPress={() => UploadImage()}>
+          <Text style={{fontSize: 20}}>Upload Image</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={{marginLeft: 100, marginTop:-24, marginLeft: 120,backgroundColor: 'yellow',width:70, textAlign:'center',fontSize:20}}>
-            Clear
-          </Text>
-        </TouchableOpacity>
+        <View style={COLORS.content1}>
+          <TextInputComp
+            name="First Name"
+            placeHolder="Enter your First Name"
+            value={user.firstName}
+          />
+          <TextInputComp
+            name="Last Name"
+            placeHolder="Enter your Last Name"
+            value={user.lastName}
+            onChangeText={e => setLastName(e)}
+          />
+          <TextInputComp
+            name="Email"
+            value={user.email}
+            placeHolder="Enter your Email Name"
+          />
+          <TextInputComp
+            value={user.password}
+            name="Password"
+            placeHolder="Enter your Password"
+          />
+          <TextInputComp
+            name="Mobile Number"
+            placeHolder="Enter your Mobile Number"
+            value={user.mobileNumber}
+          />
+          <TouchableOpacity onPress={''} style={COLORS.button}>
+            <Text>Submit</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
