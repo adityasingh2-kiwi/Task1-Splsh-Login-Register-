@@ -48,7 +48,7 @@ const COLORS = StyleSheet.create({
   TextColor: {
     marginVertical: 20,
     marginLeft: 10,
-    color: 'red',
+    // color: 'red',
     fontSize: 25,
     fontFamily: 'Cochin',
     placeholderTextColor: 'white',

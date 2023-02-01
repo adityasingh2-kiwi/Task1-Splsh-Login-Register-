@@ -21,15 +21,22 @@ const RegistrationScreen = ({navigation}) => {
   const [checkValidPassword, setCheckValidPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('');
-  const [checkValidFristName, setCheckValidFirstName] = useState('');
+  const [checkValidFirstName, setCheckValidFirstName] = useState(false);
+  // const [checkValidLastName, setCheckValidLastName] = useState(false);
   const [lastName, setLastName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [checkValidEmail, setCheckValidEmail] = useState(false);
   // console.log(setFirstName, 'setFirstNameFirstName');
 
-  // const handleFirstName =text =>{
-  //   let re =//;
-  // }
+  const handleFirstName = text => {
+    let re = /^[a-zA-Z ]{3,14}$/;
+    setFirstName(text);
+    if (re.test(text)) {
+      setCheckValidFirstName(false);
+    } else {
+      setCheckValidFirstName(true);
+    }
+  };
 
   const handleCheckEmail = text => {
     let re = /\S+@\S+\.\S+/;
@@ -87,6 +94,13 @@ const RegistrationScreen = ({navigation}) => {
             value={firstName}
             onChangeText={a => handleFirstName(a)}
           />
+          {checkValidFirstName ? (
+            <Text style={{color: 'red', textAlign: 'center'}}>
+              Name Must contain characters
+            </Text>
+          ) : (
+            <Text> </Text>
+          )}
           <TextInputComp
             name="Last Name"
             placeHolder="Enter your Last Name"

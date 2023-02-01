@@ -15,12 +15,7 @@ import TextInputComp from '../../component/TextInput';
 import COLORS from '../../component/colors';
 
 const Profile = () => {
-  // const [firstName, setFirstName] = useState('');
   const [picture, setPictures] = useState();
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [mobileNumber, setMobileNumber] = useState('');
 
   const {user} = useSelector(state => state?.getUserReducer);
 
@@ -81,7 +76,6 @@ const Profile = () => {
             name="Last Name"
             placeHolder="Enter your Last Name"
             value={user.lastName}
-            onChangeText={e => setLastName(e)}
           />
           <TextInputComp
             name="Email"

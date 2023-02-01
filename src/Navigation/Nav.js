@@ -5,6 +5,7 @@ import Login from '../Screens/Login';
 import RegistrationScreen from '../Screens/Registration';
 import Splash from '../Screens/Splash';
 import Bottom from './Bottom';
+import EditUser from '../Screens/EditUser/EditUser';
 
 const Nav = () => {
   const Stack = createNativeStackNavigator();
@@ -33,6 +34,7 @@ const Nav = () => {
           component={RegistrationScreen}
         />
         <Stack.Screen name="Bottom" component={Bottom} />
+        <Stack.Screen name="EditUser" component={EditUser} />
       </Stack.Navigator>
     </NavigationContainer>
   );
