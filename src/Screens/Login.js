@@ -9,12 +9,17 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  ImageBackground,
 } from 'react-native';
 import COLORS from '../component/colors';
 import {useDispatch} from 'react-redux';
 import {getUser} from '../redux/action/GetUser';
 // import {app_icon} from '../assets/Image/1528443245244.jpeg';
 // import {useSelector} from 'react-redux';
+const image = {
+  uri: '/Users/kiwitech/Desktop/Kiwitech/AwesomeProject/src/assets/Image/Ocean.jpeg',
+};
+
 const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -59,56 +64,62 @@ const Login = () => {
 
   return (
     <SafeAreaView style={COLORS.login1}>
+      {/* <ImageBackground source={image} resizeMode="cover" /> */}
       <ScrollView contentContainerStyle={COLORS.login2}>
-        <Image
-          source={{
-            uri: '/Users/kiwitech/Desktop/Kiwitech/AwesomeProject/src/assets/Image/1528443245244.jpeg',
-          }}
-          style={{width: 80, height: 80, marginLeft: 135}}
-        />
-        <Text style={COLORS.register1}>Login</Text>
+        <ImageBackground
+          source={image}
+          resizeMode="cover"
+          style={{flex: 1, justifyContent: 'center'}}>
+          <Image
+            source={{
+              uri: '/Users/kiwitech/Desktop/Kiwitech/AwesomeProject/src/assets/Image/1528443245244.jpeg',
+            }}
+            style={{width: 80, height: 80, marginLeft: 135}}
+          />
+          <Text style={COLORS.register1}>Login</Text>
 
-        <View>
-          <Text style={COLORS.login3}>Email-id</Text>
-          <TextInput
-            placeholder="Enter your Email-id"
-            value={email}
-            style={COLORS.TextColor1}
-            onChangeText={text => handleCheckEmail(text)}
-          />
-          {checkValidEmail ? (
-            <Text style={{color: 'red', marginLeft: 30, marginTop: 10}}>
-              Wrong Formate email
-            </Text>
-          ) : (
-            <Text> </Text>
-          )}
-          <Text style={COLORS.login3}>Password</Text>
-          <TextInput
-            style={COLORS.TextColor1}
-            placeholder="Enter your Password"
-            value={password}
-            secureTextEntry
-            onChangeText={text => handleCheckPassword(text)}
-          />
-          {checkValidPassword ? (
-            <Text style={{color: 'red', marginLeft: 30, marginTop: 10}}>
-              Password must contain(Capital Letter,Small Letter, Number,special
-              Character)
-            </Text>
-          ) : (
-            <Text> </Text>
-          )}
-          <TouchableOpacity style={COLORS.button} onPress={Login1}>
-            <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>
-              Login
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('RegistrationScreen')}>
-            <Text style={COLORS.change}>New User? Register</Text>
-          </TouchableOpacity>
-        </View>
+          <View>
+            <Text style={COLORS.login3}>Email-id</Text>
+            <TextInput
+              placeholder="Enter your Email-id"
+              value={email}
+              style={COLORS.TextColor1}
+              onChangeText={text => handleCheckEmail(text)}
+            />
+            {checkValidEmail ? (
+              <Text style={{color: 'red', marginLeft: 30, marginTop: 10}}>
+                Wrong Formate email
+              </Text>
+            ) : (
+              <Text> </Text>
+            )}
+            <Text style={COLORS.login3}>Password</Text>
+            <TextInput
+              style={COLORS.TextColor1}
+              placeholder="Enter your Password"
+              value={password}
+              secureTextEntry
+              onChangeText={text => handleCheckPassword(text)}
+            />
+            {checkValidPassword ? (
+              <Text style={{color: 'red', marginLeft: 30, marginTop: 10}}>
+                Password must contain(Capital Letter,Small Letter,
+                Number,special Character)
+              </Text>
+            ) : (
+              <Text> </Text>
+            )}
+            <TouchableOpacity style={COLORS.button} onPress={Login1}>
+              <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>
+                Login
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('RegistrationScreen')}>
+              <Text style={COLORS.change}>New User? Register</Text>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
       </ScrollView>
     </SafeAreaView>
   );

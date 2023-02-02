@@ -6,6 +6,8 @@ import RegistrationScreen from '../Screens/Registration';
 import Splash from '../Screens/Splash';
 import Bottom from './Bottom';
 import EditUser from '../Screens/EditUser/EditUser';
+import AddUser from '../Screens/EditUser/AddUser';
+import UserDetail from '../UserData/UserDetail';
 
 const Nav = () => {
   const Stack = createNativeStackNavigator();
@@ -35,6 +37,8 @@ const Nav = () => {
         />
         <Stack.Screen name="Bottom" component={Bottom} />
         <Stack.Screen name="EditUser" component={EditUser} />
+        <Stack.Screen name="AddUser" component={AddUser} />
+        <Stack.Screen name="UserDetail" component={UserDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );

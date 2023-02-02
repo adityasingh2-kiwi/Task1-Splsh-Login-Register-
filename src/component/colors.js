@@ -1,8 +1,9 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Image} from 'react-native';
 
 const COLORS = StyleSheet.create({
   login1: {
     flex: 1,
+    backgroundColor: <Image source={require('../assets/Image/Ocean.jpeg')} />,
   },
   login2: {
     paddingTop: 50,
@@ -61,7 +62,7 @@ const COLORS = StyleSheet.create({
     borderWidth: 1,
     marginLeft: 30,
     height: 40,
-    backgroundColor: 'pink',
+    // backgroundColor: 'g',
     width: 300,
   },
 
@@ -87,6 +88,21 @@ const COLORS = StyleSheet.create({
     height: 40,
     // alignContent: 'center',
     marginLeft: 175,
+  },
+
+  UserDetail: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 0.3,
+  },
+
+  onEdit: {
+    marginRight: 5,
+  },
+  userDetailAdd: {
+    width: 40,
+    height: 40,
+    marginLeft: 320,
   },
 });
 

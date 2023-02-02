@@ -5,10 +5,19 @@ import COLORS from '../../component/colors';
 import {useNavigation} from '@react-navigation/native';
 import {askCameraPermission} from '../../utils/askCameraPermission';
 import openCamera from '../../utils/openCamera';
+import {useDispatch} from 'react-redux';
+import {updateUser} from '../../redux/action/GetUser';
 
-const EditUser = () => {
+const EditUser = ({route}) => {
+  const {item} = route?.params;
+  // console.log(item, 'itemitem');
   const navigation = useNavigation();
-  const [picture, setPictures] = useState('');
+
+  const dispatch = useDispatch();
+  const [picture, setPictures] = useState(item?.image);
+  const [name, setName] = useState(item?.name);
+  const [email, setEmail] = useState(item?.email);
+  const [age, setAge] = useState(item?.age);
   const cb = image => {
     setPictures(image.path);
   };
@@ -29,9 +38,25 @@ const EditUser = () => {
       {text: 'Gallery', onPress: () => openCamera(1, cb)},
     ]);
   };
+  const OnUpdate = () => {
+    console.log('preesd');
+    const data = {
+      id: item?.id,
+      name: name,
+      image: picture,
+      email: email,
+      age: age,
+    };
+    console.log(data, 'paylSoad');
+    navigation.navigate('UserDetail');
+    dispatch(updateUser(data));
+    // console.log(data, 'payload');
+    // nav fun
+  };
   // const [Name, setFirstName] = useState('');
   return (
     <View style={{flex: 1, justifyContent: 'center'}}>
+      <Text style={{fontSize: 20, textAlign: 'center'}}>Edit User</Text>
       <Image
         style={{
           backgroundColor: 'blue',
@@ -42,10 +67,7 @@ const EditUser = () => {
           marginLeft: 120,
         }}
         source={{
-          uri:
-            picture === undefined
-              ? '/Users/kiwitech/Desktop/Kiwitech/AwesomeProject/src/assets/Image/img1.jpeg'
-              : picture,
+          uri: item?.image ? item?.image : picture,
         }}
       />
       <TouchableOpacity
@@ -59,10 +81,25 @@ const EditUser = () => {
         onPress={() => UploadImage()}>
         <Text style={{fontSize: 20, textAlign: 'center'}}>Upload Image</Text>
       </TouchableOpacity>
-      <TextInputComp name="Name" placeHolder="Enter your Name" />
-      <TextInputComp name="Email" placeHolder="Enter your Email" />
-      <TextInputComp name="Password" placeHolder="Enter your Password" />
-      <TouchableOpacity onPress={navigation.navigate('')} style={COLORS.button}>
+      <TextInputComp
+        name="Name"
+        placeHolder="Enter your Name"
+        value={name}
+        onChangeText={e => setName(e)}
+      />
+      <TextInputComp
+        name="Email"
+        placeHolder="Enter your Email"
+        value={email}
+        onChangeText={e => setEmail(e)}
+      />
+      <TextInputComp
+        name="Age"
+        placeHolder="Enter your Age"
+        value={age.toString()}
+        onChangeText={e => setAge(e)}
+      />
+      <TouchableOpacity onPress={() => OnUpdate()} style={COLORS.button}>
         <Text>Update</Text>
       </TouchableOpacity>
     </View>

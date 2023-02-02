@@ -16,6 +16,7 @@
     "@react-navigation/native-stack": "^6.9.8",
     "@react-navigation/stack": "^6.3.11",
     "react": "18.2.0",
+    "react-keygen": "^0.1.3",
     "react-native": "0.71.0",
     "react-native-expo-swipe-button": "^1.0.2",
     "react-native-fontawesome": "^7.0.0",
