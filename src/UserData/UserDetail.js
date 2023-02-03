@@ -27,67 +27,36 @@ const UserDetail = () => {
     return (
       <View style={COLORS.UserDetail}>
         <TouchableOpacity style={COLORS.onEdit} onPress={() => OnEdit(item)}>
-          <Text style={{fontSize: 20, backgroundColor: 'green'}}>Edit</Text>
+          <Text style={COLORS.SwipeEdit}>Edit</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{}} onPress={() => OnDelete(item)}>
-          <Text style={{marginRight: 10, fontSize: 20, backgroundColor: 'red'}}>
-            Delete
-          </Text>
+          <Text style={COLORS.SwipeDelete}>Delete</Text>
         </TouchableOpacity>
       </View>
     );
   };
   const renderItemList = item => {
     return (
-      // <View><Text>jaskdjk</Text></View>
       <Swipeable
         renderRightActions={() => RightSwipe(item)}
-        containerStyle={{
-          paddingVertical: 10,
-          paddingHorizontal: 20,
-        }}>
-        <TouchableOpacity
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-          }}>
-          <Image
-            style={{height: 40, width: 40, borderRadius: 80}}
-            source={{uri: item?.image}}
-          />
-          <Text style={{fontSize: 18, marginLeft: 20}}>{item?.name}</Text>
+        containerStyle={COLORS.Swipe1}>
+        <TouchableOpacity style={COLORS.Touchable1}>
+          <Image style={COLORS.ImageDetailImage} source={{uri: item?.image}} />
+          <Text style={COLORS.ItemName}>{item?.name}</Text>
         </TouchableOpacity>
       </Swipeable>
     );
   };
   return (
     <View style={{flex: 1}}>
-      <View
-        style={{
-          marginTop: 40,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flex: 0.1,
-          paddingHorizontal: 40,
-        }}>
-        <Text
-          style={{
-            fontSize: 25,
-            textAlign: 'center',
-          }}>
-          UserDetails
-        </Text>
+      <View style={COLORS.UserDetailsScreen1}>
+        <Text style={COLORS.UserDetailsScreen}>UserDetails</Text>
         <TouchableOpacity onPress={() => navigation.navigate('AddUser')}>
           <Image
             source={{
               uri: '/Users/kiwitech/Desktop/Kiwitech/AwesomeProject/src/assets/Image/add.png',
             }}
-            style={{
-              width: 20,
-              height: 20,
-            }}
+            style={COLORS.AddIcon}
           />
           {/* onPress={navigation.navigate('AddUser')} */}
         </TouchableOpacity>

@@ -51,17 +51,10 @@ const AddUser = () => {
     console.log(data, 'datapay');
   };
   return (
-    <View style={{flex: 1, justifyContent: 'center'}}>
-      <Text style={{fontSize: 20, textAlign: 'center'}}>Add User</Text>
+    <View style={COLORS.AddUser}>
+      <Text style={COLORS.AddUser1}>Add User</Text>
       <Image
-        style={{
-          backgroundColor: 'blue',
-          marginTop: 40,
-          borderRadius: 90,
-          height: 150,
-          width: 150,
-          marginLeft: 120,
-        }}
+        style={COLORS.ImagePicker}
         source={{
           uri:
             picture === undefined
@@ -70,15 +63,9 @@ const AddUser = () => {
         }}
       />
       <TouchableOpacity
-        style={{
-          backgroundColor: 'yellow',
-          width: 180,
-          marginTop: 25,
-          borderRadius: 30,
-          marginLeft: 110,
-        }}
+        style={COLORS.UserDetailMain}
         onPress={() => UploadImage()}>
-        <Text style={{fontSize: 20, textAlign: 'center'}}>Upload Image</Text>
+        <Text style={COLORS.UploadUser}>Upload Image</Text>
       </TouchableOpacity>
       <TextInputComp
         name="Name"

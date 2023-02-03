@@ -49,7 +49,7 @@ const Login = () => {
   };
 
   const Login1 = () => {
-    console.log(email, password, 'creds');
+    console.log(email, password, 'crud');
     if (email !== '' && password !== '') {
       const data = {
         email: email,
@@ -63,18 +63,17 @@ const Login = () => {
   };
 
   return (
-    <SafeAreaView style={COLORS.login1}>
-      {/* <ImageBackground source={image} resizeMode="cover" /> */}
-      <ScrollView contentContainerStyle={COLORS.login2}>
-        <ImageBackground
-          source={image}
-          resizeMode="cover"
-          style={{flex: 1, justifyContent: 'center'}}>
+    <ImageBackground
+      source={image}
+      resizeMode="cover"
+      style={COLORS.ImageBackground}>
+      <SafeAreaView style={COLORS.login1}>
+        <ScrollView contentContainerStyle={COLORS.login2}>
           <Image
             source={{
               uri: '/Users/kiwitech/Desktop/Kiwitech/AwesomeProject/src/assets/Image/1528443245244.jpeg',
             }}
-            style={{width: 80, height: 80, marginLeft: 135}}
+            style={COLORS.LoginImage}
           />
           <Text style={COLORS.register1}>Login</Text>
 
@@ -87,9 +86,7 @@ const Login = () => {
               onChangeText={text => handleCheckEmail(text)}
             />
             {checkValidEmail ? (
-              <Text style={{color: 'red', marginLeft: 30, marginTop: 10}}>
-                Wrong Formate email
-              </Text>
+              <Text style={COLORS.PasswordValidation}>Wrong Formate email</Text>
             ) : (
               <Text> </Text>
             )}
@@ -102,7 +99,7 @@ const Login = () => {
               onChangeText={text => handleCheckPassword(text)}
             />
             {checkValidPassword ? (
-              <Text style={{color: 'red', marginLeft: 30, marginTop: 10}}>
+              <Text style={COLORS.PasswordValidation}>
                 Password must contain(Capital Letter,Small Letter,
                 Number,special Character)
               </Text>
@@ -110,18 +107,16 @@ const Login = () => {
               <Text> </Text>
             )}
             <TouchableOpacity style={COLORS.button} onPress={Login1}>
-              <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>
-                Login
-              </Text>
+              <Text style={COLORS.LoginButton}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => navigation.navigate('RegistrationScreen')}>
               <Text style={COLORS.change}>New User? Register</Text>
             </TouchableOpacity>
           </View>
-        </ImageBackground>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 

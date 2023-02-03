@@ -8,16 +8,8 @@ const Home = ({navigation}) => {
 
   const {user} = useSelector(state => state?.getUserReducer);
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
-      <Text
-        style={{
-          fontSize: 40,
-          textAlign: 'center',
-          marginTop: 150,
-          marginBottom: 70,
-        }}>
-        Welcome to Home Page
-      </Text>
+    <SafeAreaView style={COLORS.login1}>
+      <Text style={COLORS.HomeHeading}>Welcome to Home Page</Text>
       <Text>Email: {user.email}</Text>
       <Text>Password: {user.password}</Text>
       <Text>firstName: {user.firstName}</Text>
@@ -27,17 +19,7 @@ const Home = ({navigation}) => {
       <TouchableOpacity>
         <Text
           onPress={() => navigation.navigate('Login')}
-          style={{
-            textAlign: 'center',
-            marginTop: 70,
-            backgroundColor: 'magenta',
-            color: 'white',
-            fontWeight: 'bold',
-            width: 90,
-            height: 30,
-            fontSize: 20,
-            marginLeft: 152,
-          }}>
+          style={COLORS.Logout}>
           LogOut
         </Text>
       </TouchableOpacity>

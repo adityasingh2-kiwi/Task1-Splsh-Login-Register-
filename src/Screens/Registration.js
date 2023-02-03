@@ -22,11 +22,9 @@ const RegistrationScreen = ({navigation}) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [checkValidFirstName, setCheckValidFirstName] = useState(false);
-  // const [checkValidLastName, setCheckValidLastName] = useState(false);
   const [lastName, setLastName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [checkValidEmail, setCheckValidEmail] = useState(false);
-  // console.log(setFirstName, 'setFirstNameFirstName');
 
   const handleFirstName = text => {
     let re = /^[a-zA-Z ]{3,14}$/;
@@ -81,8 +79,7 @@ const RegistrationScreen = ({navigation}) => {
   };
   return (
     <SafeAreaView style={[COLORS.color1, COLORS.register1]}>
-      <ScrollView
-        contentContainerStyle={{paddingTop: 50, paddingHorizontal: 20}}>
+      <ScrollView contentContainerStyle={COLORS.RegisterHeading}>
         <Text style={[COLORS.color1, COLORS.register1]}>Register</Text>
         <Text style={[COLORS.color1, COLORS.register2]}>
           Enter your details for Register
@@ -95,7 +92,7 @@ const RegistrationScreen = ({navigation}) => {
             onChangeText={a => handleFirstName(a)}
           />
           {checkValidFirstName ? (
-            <Text style={{color: 'red', textAlign: 'center'}}>
+            <Text style={COLORS.PasswordValidation}>
               Name Must contain characters
             </Text>
           ) : (
@@ -115,7 +112,7 @@ const RegistrationScreen = ({navigation}) => {
           />
           {/* {checkValidEmail && <Text style={{color: 'red'}}>Wrong Formate email</Text>} */}
           {checkValidEmail ? (
-            <Text style={{color: 'red'}}>Wrong Formate email</Text>
+            <Text style={COLORS.PasswordValidation}>Wrong Formate email</Text>
           ) : (
             <Text> </Text>
           )}
@@ -126,7 +123,7 @@ const RegistrationScreen = ({navigation}) => {
             onChangeText={e => handleCheckPassword(e)}
           />
           {checkValidPassword ? (
-            <Text style={{color: 'red', marginLeft: 30, marginTop: 10}}>
+            <Text style={COLORS.PasswordValidation}>
               Password must contain(Capital Letter,Small Letter, Number,special
               Character)
             </Text>

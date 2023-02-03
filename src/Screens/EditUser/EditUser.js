@@ -10,9 +10,8 @@ import {updateUser} from '../../redux/action/GetUser';
 
 const EditUser = ({route}) => {
   const {item} = route?.params;
-  // console.log(item, 'itemitem');
+  console.log(item, 'itemitem');
   const navigation = useNavigation();
-
   const dispatch = useDispatch();
   const [picture, setPictures] = useState(item?.image);
   const [name, setName] = useState(item?.name);
@@ -47,39 +46,27 @@ const EditUser = ({route}) => {
       email: email,
       age: age,
     };
-    console.log(data, 'paylSoad');
+    console.log(data, 'payLoad');
     navigation.navigate('UserDetail');
     dispatch(updateUser(data));
+
     // console.log(data, 'payload');
     // nav fun
   };
   // const [Name, setFirstName] = useState('');
   return (
-    <View style={{flex: 1, justifyContent: 'center'}}>
-      <Text style={{fontSize: 20, textAlign: 'center'}}>Edit User</Text>
+    <View style={COLORS.AddUser}>
+      <Text style={COLORS.AddUser1}>Edit User</Text>
       <Image
-        style={{
-          backgroundColor: 'blue',
-          marginTop: 40,
-          borderRadius: 90,
-          height: 150,
-          width: 150,
-          marginLeft: 120,
-        }}
+        style={COLORS.ImagePickerEditUser}
         source={{
           uri: item?.image ? item?.image : picture,
         }}
       />
       <TouchableOpacity
-        style={{
-          backgroundColor: 'yellow',
-          width: 180,
-          marginTop: 25,
-          borderRadius: 30,
-          marginLeft: 110,
-        }}
+        style={COLORS.EditUploadImage}
         onPress={() => UploadImage()}>
-        <Text style={{fontSize: 20, textAlign: 'center'}}>Upload Image</Text>
+        <Text style={COLORS.UploadImage1}>Upload Image</Text>
       </TouchableOpacity>
       <TextInputComp
         name="Name"

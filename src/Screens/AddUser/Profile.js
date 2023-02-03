@@ -43,13 +43,7 @@ const Profile = () => {
     <ScrollView>
       <View style={{flex: 1, alignItems: 'center'}}>
         <Image
-          style={{
-            backgroundColor: 'blue',
-            marginTop: 40,
-            borderRadius: 90,
-            height: 150,
-            width: 150,
-          }}
+          style={COLORS.PImagePicker}
           source={{
             uri:
               picture === undefined
@@ -58,11 +52,7 @@ const Profile = () => {
           }}
         />
         <TouchableOpacity
-          style={{
-            backgroundColor: 'pink',
-            marginTop: 25,
-            borderRadius: 30,
-          }}
+          style={COLORS.UploadImage}
           onPress={() => UploadImage()}>
           <Text style={{fontSize: 20}}>Upload Image</Text>
         </TouchableOpacity>

@@ -1,4 +1,4 @@
-import {GET_USER, UPDATE_USER, DELETE_USER,ADD_USER} from '../Type';
+import {GET_USER, UPDATE_USER, DELETE_USER, ADD_USER} from '../Type';
 
 export const getUser = data => {
   console.log(data, 'actionData');
@@ -8,7 +8,7 @@ export const getUser = data => {
   };
 };
 export const updateUser = data => {
-  console.log(data, 'updateUseraction');
+  console.log(data, 'updateUserAction');
   return {
     type: UPDATE_USER,
     data: data,

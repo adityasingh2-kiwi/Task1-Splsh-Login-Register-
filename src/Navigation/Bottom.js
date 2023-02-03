@@ -1,7 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../Screens/Home';
-import Favorite from '../Screens/AddUser/Favorite';
 import Profile from '../Screens/AddUser/Profile';
 import UserDetail from '../UserData/UserDetail';
 

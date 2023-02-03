@@ -5,7 +5,7 @@ const initialState = {
     {
       id: 1,
       image: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
-      name: 'Aditya',
+      name: 'Adi',
       age: 20,
       email: 'Aditya@yopmail.com',
     },
@@ -40,8 +40,8 @@ const initialState = {
   ],
 };
 const crudReducer = (state = initialState, action) => {
-  console.log(action.type, 'actiontype');
-  console.log(action.data, 'actiondata');
+  console.log(action.type, 'actionType');
+  console.log(action.data, 'actionData');
   switch (action.type) {
     case ADD_USER: {
       return {
@@ -66,10 +66,11 @@ const crudReducer = (state = initialState, action) => {
         ...state,
 
         allUser: state.allUser.map(item => {
-          console.log(item, 'itempayload');
+          console.log(item, 'itemPayload');
+          console.log(action.data, 'hello');
           if (item?.id === action.data.id) {
-            console.log(item, 'exactpayload');
-            return action.payload;
+            console.log(item, 'exactPayload');
+            return action.data;
           }
           return item;
         }),
