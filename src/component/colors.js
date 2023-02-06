@@ -160,6 +160,7 @@ const COLORS = StyleSheet.create({
     borderRadius: 90,
     height: 150,
     width: 150,
+    textAlign: 'center',
   },
   UploadImage: {
     backgroundColor: 'pink',
@@ -168,7 +169,12 @@ const COLORS = StyleSheet.create({
   },
   AddUser: {flex: 1, justifyContent: 'center'},
   AddUser1: {fontSize: 20, textAlign: 'center'},
-  UploadUser: {fontSize: 20, textAlign: 'center'},
+  UploadUser: {
+    fontSize: 20,
+    textAlign: 'center',
+    marginLeft: 90,
+    backgroundColor: 'yellow',
+  },
   ImagePickerEditUser: {
     backgroundColor: 'blue',
     marginTop: 40,
@@ -231,6 +237,14 @@ const COLORS = StyleSheet.create({
   SwipeEdit: {
     fontSize: 20,
     backgroundColor: 'green',
+  },
+  flx: {
+    flex: 1,
+  },
+
+  ImgPic: {
+    flex: 1,
+    alignItems: 'center',
   },
 });
 

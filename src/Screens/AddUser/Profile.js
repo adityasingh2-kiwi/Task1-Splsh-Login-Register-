@@ -10,7 +10,6 @@ import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {askCameraPermission} from '../../utils/askCameraPermission';
 import openCamera from '../../utils/openCamera';
-// import {TextInput} from 'react-native-gesture-handler';
 import TextInputComp from '../../component/TextInput';
 import COLORS from '../../component/colors';
 
@@ -41,7 +40,7 @@ const Profile = () => {
   };
   return (
     <ScrollView>
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <View style={COLORS.ImgPic}>
         <Image
           style={COLORS.PImagePicker}
           source={{

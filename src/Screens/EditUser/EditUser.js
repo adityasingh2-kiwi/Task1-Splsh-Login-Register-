@@ -10,7 +10,6 @@ import {updateUser} from '../../redux/action/GetUser';
 
 const EditUser = ({route}) => {
   const {item} = route?.params;
-  console.log(item, 'itemitem');
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [picture, setPictures] = useState(item?.image);
@@ -21,7 +20,6 @@ const EditUser = ({route}) => {
     setPictures(image.path);
   };
   console.log(picture, 'image.path');
-
   const UploadImage = async () => {
     console.log('openCamera');
     await askCameraPermission();
@@ -38,7 +36,6 @@ const EditUser = ({route}) => {
     ]);
   };
   const OnUpdate = () => {
-    console.log('preesd');
     const data = {
       id: item?.id,
       name: name,

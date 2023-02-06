@@ -14,8 +14,6 @@ import {
 import COLORS from '../component/colors';
 import {useDispatch} from 'react-redux';
 import {getUser} from '../redux/action/GetUser';
-// import {app_icon} from '../assets/Image/1528443245244.jpeg';
-// import {useSelector} from 'react-redux';
 const image = {
   uri: '/Users/kiwitech/Desktop/Kiwitech/AwesomeProject/src/assets/Image/Ocean.jpeg',
 };
@@ -85,10 +83,8 @@ const Login = () => {
               style={COLORS.TextColor1}
               onChangeText={text => handleCheckEmail(text)}
             />
-            {checkValidEmail ? (
+            {checkValidEmail && (
               <Text style={COLORS.PasswordValidation}>Wrong Formate email</Text>
-            ) : (
-              <Text> </Text>
             )}
             <Text style={COLORS.login3}>Password</Text>
             <TextInput
@@ -98,13 +94,11 @@ const Login = () => {
               secureTextEntry
               onChangeText={text => handleCheckPassword(text)}
             />
-            {checkValidPassword ? (
+            {checkValidPassword && (
               <Text style={COLORS.PasswordValidation}>
                 Password must contain(Capital Letter,Small Letter,
                 Number,special Character)
               </Text>
-            ) : (
-              <Text> </Text>
             )}
             <TouchableOpacity style={COLORS.button} onPress={Login1}>
               <Text style={COLORS.LoginButton}>Login</Text>

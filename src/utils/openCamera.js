@@ -1,6 +1,7 @@
 import ImagePicker from 'react-native-image-crop-picker';
 
 const openCamera = (index, cb) => {
+  console.log(index, cb, 'Aditya ');
   const myAction =
     index === 1 ? ImagePicker.openPicker : ImagePicker.openCamera;
   const options = {

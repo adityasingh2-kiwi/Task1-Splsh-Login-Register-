@@ -10,7 +10,7 @@ import {addUser} from '../../redux/action/GetUser';
 
 const AddUser = () => {
   const navigation = useNavigation();
-  const [picture, setPictures] = useState('');
+  const [picture, setPictures] = useState();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
@@ -45,6 +45,7 @@ const AddUser = () => {
       email: email,
       age: age,
     };
+    console.log(picture, 'picture');
     navigation.navigate('UserDetail');
     dispatch(addUser(data));
 
@@ -58,7 +59,7 @@ const AddUser = () => {
         source={{
           uri:
             picture === undefined
-              ? '/Users/kiwitech/Desktop/Kiwitech/AwesomeProject/src/assets/Image/img1.jpeg'
+              ? 'https://images.unsplash.com/photo-1474314170901-f351b68f544f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80'
               : picture,
         }}
       />

@@ -12,8 +12,6 @@ import COLORS from '../component/colors';
 import TextInputComp from '../component/TextInput';
 import {getUser} from '../redux/action/GetUser';
 
-// import {useDispatch} from 'react-redux';
-
 const RegistrationScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
@@ -24,7 +22,18 @@ const RegistrationScreen = ({navigation}) => {
   const [checkValidFirstName, setCheckValidFirstName] = useState(false);
   const [lastName, setLastName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
+  const [checkValidMobileNo, setCheckValidMobileNo] = useState(false);
   const [checkValidEmail, setCheckValidEmail] = useState(false);
+
+  const handleMobileNumber = text => {
+    let re = /^[0]?[789]\d{9}$/;
+    setMobileNumber(text);
+    if (re.test(text)) {
+      setCheckValidMobileNo(false);
+    } else {
+      setCheckValidMobileNo(true);
+    }
+  };
 
   const handleFirstName = text => {
     let re = /^[a-zA-Z ]{3,14}$/;
@@ -60,6 +69,7 @@ const RegistrationScreen = ({navigation}) => {
     if (
       email !== '' &&
       password !== '' &&
+      confirmPassword !== '' &&
       firstName !== '' &&
       lastName !== '' &&
       mobileNumber !== ''
@@ -71,8 +81,14 @@ const RegistrationScreen = ({navigation}) => {
         lastName: lastName,
         mobileNumber: mobileNumber,
       };
-      navigation.navigate('Bottom');
-      dispatch(getUser(data));
+      if (password !== confirmPassword) {
+        console.log(password);
+        console.log(confirmPassword);
+        Alert.alert('Password Not Matched');
+      } else {
+        navigation.navigate('Bottom');
+        dispatch(getUser(data));
+      }
     } else {
       Alert.alert('Please enter all details');
     }
@@ -91,12 +107,10 @@ const RegistrationScreen = ({navigation}) => {
             value={firstName}
             onChangeText={a => handleFirstName(a)}
           />
-          {checkValidFirstName ? (
+          {checkValidFirstName && (
             <Text style={COLORS.PasswordValidation}>
               Name Must contain characters
             </Text>
-          ) : (
-            <Text> </Text>
           )}
           <TextInputComp
             name="Last Name"
@@ -104,6 +118,11 @@ const RegistrationScreen = ({navigation}) => {
             value={lastName}
             onChangeText={e => setLastName(e)}
           />
+          {checkValidFirstName && (
+            <Text style={COLORS.PasswordValidation}>
+              Name Must contain characters
+            </Text>
+          )}
           <TextInputComp
             name="Email"
             value={email}
@@ -111,37 +130,38 @@ const RegistrationScreen = ({navigation}) => {
             onChangeText={text => handleCheckEmail(text)}
           />
           {/* {checkValidEmail && <Text style={{color: 'red'}}>Wrong Formate email</Text>} */}
-          {checkValidEmail ? (
+          {checkValidEmail && (
             <Text style={COLORS.PasswordValidation}>Wrong Formate email</Text>
-          ) : (
-            <Text> </Text>
           )}
           <TextInputComp
+            secureTextEntry={true}
             value={password}
             name="Password"
             placeHolder="Enter your Password"
             onChangeText={e => handleCheckPassword(e)}
           />
-          {checkValidPassword ? (
+          {checkValidPassword && (
             <Text style={COLORS.PasswordValidation}>
               Password must contain(Capital Letter,Small Letter, Number,special
               Character)
             </Text>
-          ) : (
-            <Text> </Text>
           )}
           <TextInputComp
+            secureTextEntry={true}
             value={confirmPassword}
             name="ConfirmPassword"
             placeHolder="Enter your Password"
-            onChangeText={e => setConfirmPassword()}
+            onChangeText={e => setConfirmPassword(e)}
           />
           <TextInputComp
             name="Mobile Number"
-            placeHolder="Enter your Mobile Number"
+            placeHolder="Mobile Number"
             value={mobileNumber}
-            onChangeText={e => setMobileNumber(e)}
+            onChangeText={text => handleMobileNumber(text)}
           />
+          {checkValidMobileNo && (
+            <Text style={COLORS.PasswordValidation}>Incorrect Formate</Text>
+          )}
           <TouchableOpacity onPress={Login1} style={COLORS.button}>
             <Text>Submit</Text>
           </TouchableOpacity>
