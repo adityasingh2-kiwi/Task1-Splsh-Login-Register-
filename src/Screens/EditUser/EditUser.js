@@ -10,6 +10,7 @@ import {updateUser} from '../../redux/action/GetUser';
 
 const EditUser = ({route}) => {
   const {item} = route?.params;
+  console.log(item, '@item');
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [picture, setPictures] = useState(item?.image);
@@ -43,21 +44,18 @@ const EditUser = ({route}) => {
       email: email,
       age: age,
     };
-    console.log(data, 'payLoad');
-    navigation.navigate('UserDetail');
-    dispatch(updateUser(data));
 
-    // console.log(data, 'payload');
-    // nav fun
+    dispatch(updateUser(data));
+    navigation.navigate('UserDetail');
   };
-  // const [Name, setFirstName] = useState('');
+
   return (
     <View style={COLORS.AddUser}>
       <Text style={COLORS.AddUser1}>Edit User</Text>
       <Image
         style={COLORS.ImagePickerEditUser}
         source={{
-          uri: item?.image ? item?.image : picture,
+          uri: picture,
         }}
       />
       <TouchableOpacity

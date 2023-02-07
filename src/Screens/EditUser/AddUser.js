@@ -1,24 +1,33 @@
 import {View, Text, TouchableOpacity, Alert, Image} from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import TextInputComp from '../../component/TextInput';
 import COLORS from '../../component/colors';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {askCameraPermission} from '../../utils/askCameraPermission';
 import openCamera from '../../utils/openCamera';
 import {useDispatch} from 'react-redux';
 import {addUser} from '../../redux/action/GetUser';
 
 const AddUser = () => {
+  useFocusEffect(
+    useCallback(() => {
+      setName('');
+      setEmail('');
+      setAge('');
+    }, []),
+  );
   const navigation = useNavigation();
-  const [picture, setPictures] = useState();
+  const [picture, setPictures] = useState(
+    'https://images.unsplash.com/photo-1474314170901-f351b68f544f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80',
+  );
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
   const dispatch = useDispatch();
+
   const cb = image => {
     setPictures(image.path);
   };
-  console.log(picture, 'image.path');
 
   const UploadImage = async () => {
     console.log('openCamera');
@@ -36,7 +45,7 @@ const AddUser = () => {
     ]);
   };
   // const [Name, setFirstName] = useState('');
-  const onSubmit = () => {
+  const onSubmit = async () => {
     let generateRandomNum = () => Math.floor(Math.random() * 1001);
     const data = {
       id: generateRandomNum().toString(),
@@ -46,10 +55,8 @@ const AddUser = () => {
       age: age,
     };
     console.log(picture, 'picture');
+    await dispatch(addUser(data));
     navigation.navigate('UserDetail');
-    dispatch(addUser(data));
-
-    console.log(data, 'datapay');
   };
   return (
     <View style={COLORS.AddUser}>
@@ -57,10 +64,7 @@ const AddUser = () => {
       <Image
         style={COLORS.ImagePicker}
         source={{
-          uri:
-            picture === undefined
-              ? 'https://images.unsplash.com/photo-1474314170901-f351b68f544f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80'
-              : picture,
+          uri: picture,
         }}
       />
       <TouchableOpacity

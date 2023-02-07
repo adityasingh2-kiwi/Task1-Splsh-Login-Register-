@@ -33,14 +33,6 @@ const initialState = {
       age: 28,
       email: 'Harry@yopmail.com',
     },
-    {
-      id: 5,
-      image:
-        'data:image/jpeg;base64,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',
-      name: 'Denial',
-      age: 30,
-      email: 'Denial@yopmail.com',
-    },
   ],
 };
 const crudReducer = (state = initialState, action) => {
@@ -70,10 +62,10 @@ const crudReducer = (state = initialState, action) => {
         ...state,
 
         allUser: state.allUser.map(item => {
-          console.log(item, 'itemPayload');
-          console.log(action.data, 'hello');
+          // console.log(item, 'itemPayload');
+          // console.log(action.data, 'hello');
           if (item?.id === action.data.id) {
-            console.log(item, 'exactPayload');
+            // console.log(item, 'exactPayload');
             return action.data;
           }
           return item;

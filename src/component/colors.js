@@ -77,8 +77,10 @@ const COLORS = StyleSheet.create({
   },
 
   change: {
+    backgroundColor: 'yellow',
     color: 'blue',
     marginTop: 20,
+    width: 220,
     fontSize: 25,
     marginLeft: 60,
   },

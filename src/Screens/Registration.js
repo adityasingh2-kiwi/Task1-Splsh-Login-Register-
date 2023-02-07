@@ -56,7 +56,7 @@ const RegistrationScreen = ({navigation}) => {
   };
 
   const handleCheckPassword = text => {
-    let re = /^[a-z+A-Z+0-9+!@#$%^&*]{8,16}$/;
+    let re = /^[a-z]+[A-Z]+[0-9]+[!@#$%^&]+]{8,16}$/;
     setPassword(text);
     if (re.test(text)) {
       setCheckValidPassword(false);
@@ -72,7 +72,11 @@ const RegistrationScreen = ({navigation}) => {
       confirmPassword !== '' &&
       firstName !== '' &&
       lastName !== '' &&
-      mobileNumber !== ''
+      mobileNumber !== '' &&
+      checkValidPassword === false &&
+      checkValidFirstName === false &&
+      checkValidMobileNo === false &&
+      checkValidEmail === false
     ) {
       const data = {
         email: email,
@@ -90,7 +94,7 @@ const RegistrationScreen = ({navigation}) => {
         dispatch(getUser(data));
       }
     } else {
-      Alert.alert('Please enter all details');
+      Alert.alert('Please enter all details in Correct Formate');
     }
   };
   return (

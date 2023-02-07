@@ -75,6 +75,7 @@ const Profile = () => {
             value={user.password}
             name="Password"
             placeHolder="Enter your Password"
+            secureTextEntry={true}
           />
           <TextInputComp
             name="Mobile Number"

@@ -1,4 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
+
 import React, {useState} from 'react';
 import {
   SafeAreaView,
@@ -48,7 +49,12 @@ const Login = () => {
 
   const Login1 = () => {
     console.log(email, password, 'crud');
-    if (email !== '' && password !== '') {
+    if (
+      email !== '' &&
+      password !== '' &&
+      checkValidPassword === false &&
+      checkValidEmail === false
+    ) {
       const data = {
         email: email,
         password: password,
@@ -56,7 +62,7 @@ const Login = () => {
       navigation.navigate('Bottom');
       dispatch(getUser(data));
     } else {
-      Alert.alert('Please enter all details');
+      Alert.alert('Please enter all details in correct Formate');
     }
   };
 

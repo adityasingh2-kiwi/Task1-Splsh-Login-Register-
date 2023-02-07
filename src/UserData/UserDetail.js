@@ -15,6 +15,10 @@ const UserDetail = () => {
     navigation.navigate('EditUser', {item});
   };
 
+  const ShowUser = item => {
+    navigation.navigate('ViewUser', {item});
+  };
+
   const OnDelete = item => {
     console.log('Delete');
     const payload = {
@@ -29,7 +33,7 @@ const UserDetail = () => {
         <TouchableOpacity style={COLORS.onEdit} onPress={() => OnEdit(item)}>
           <Text style={COLORS.SwipeEdit}>Edit</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{}} onPress={() => OnDelete(item)}>
+        <TouchableOpacity onPress={() => OnDelete(item)}>
           <Text style={COLORS.SwipeDelete}>Delete</Text>
         </TouchableOpacity>
       </View>
@@ -40,7 +44,9 @@ const UserDetail = () => {
       <Swipeable
         renderRightActions={() => RightSwipe(item)}
         containerStyle={COLORS.Swipe1}>
-        <TouchableOpacity style={COLORS.Touchable1}>
+        <TouchableOpacity
+          style={COLORS.Touchable1}
+          onPress={() => ShowUser(item)}>
           <Image style={COLORS.ImageDetailImage} source={{uri: item?.image}} />
           <Text style={COLORS.ItemName}>{item?.name}</Text>
         </TouchableOpacity>

@@ -8,6 +8,7 @@ import Bottom from './Bottom';
 import EditUser from '../Screens/EditUser/EditUser';
 import AddUser from '../Screens/EditUser/AddUser';
 import UserDetail from '../UserData/UserDetail';
+import ViewUser from '../Screens/EditUser/ViewUser';
 
 const Nav = () => {
   const Stack = createNativeStackNavigator();
@@ -39,6 +40,7 @@ const Nav = () => {
         <Stack.Screen name="EditUser" component={EditUser} />
         <Stack.Screen name="AddUser" component={AddUser} />
         <Stack.Screen name="UserDetail" component={UserDetail} />
+        <Stack.Screen name="ViewUser" component={ViewUser} />
       </Stack.Navigator>
     </NavigationContainer>
   );
