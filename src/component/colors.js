@@ -183,6 +183,22 @@ const COLORS = StyleSheet.create({
     borderRadius: 90,
     height: 150,
     width: 150,
+    // marginLeft: 120,
+  },
+  ViewProfile: {
+    backgroundColor: 'blue',
+    marginTop: 40,
+    borderRadius: 90,
+    height: 100,
+    width: 100,
+    // marginLeft: 120,
+  },
+  ImagePickerEditUser1: {
+    backgroundColor: 'blue',
+    marginTop: 40,
+    borderRadius: 90,
+    height: 150,
+    width: 150,
     marginLeft: 120,
   },
   EditUploadImage: {

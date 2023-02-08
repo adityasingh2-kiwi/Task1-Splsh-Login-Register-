@@ -12,7 +12,11 @@ const UserDetail = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const OnEdit = item => {
-    navigation.navigate('EditUser', {item});
+    navigation.navigate('EditUser', {item, Add: false});
+  };
+
+  const AddItem = item => {
+    navigation.navigate('EditUser', {Add: true});
   };
 
   const ShowUser = item => {
@@ -57,14 +61,13 @@ const UserDetail = () => {
     <View style={{flex: 1}}>
       <View style={COLORS.UserDetailsScreen1}>
         <Text style={COLORS.UserDetailsScreen}>UserDetails</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('AddUser')}>
+        <TouchableOpacity onPress={() => AddItem()}>
           <Image
             source={{
               uri: '/Users/kiwitech/Desktop/Kiwitech/AwesomeProject/src/assets/Image/add.png',
             }}
             style={COLORS.AddIcon}
           />
-          {/* onPress={navigation.navigate('AddUser')} */}
         </TouchableOpacity>
       </View>
       <FlatList data={allUser} renderItem={({item}) => renderItemList(item)} />

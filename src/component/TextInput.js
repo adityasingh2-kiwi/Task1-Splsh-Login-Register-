@@ -8,11 +8,13 @@ const TextInputComp = ({
   value,
   onChangeText,
   secureTextEntry,
+  editable,
 }) => {
   return (
     <View>
       <Text style={COLORS.TextColor}>{name}</Text>
       <TextInput
+        editable={editable}
         placeholder={placeHolder}
         value={value}
         style={COLORS.TextColor1}
