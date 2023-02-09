@@ -9,6 +9,7 @@ const TextInputComp = ({
   onChangeText,
   secureTextEntry,
   editable,
+  error,
 }) => {
   return (
     <View>
@@ -21,6 +22,7 @@ const TextInputComp = ({
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
       />
+      {error && <Text style={{color: 'red', fontSize: 15}}>{error}</Text>}
     </View>
   );
 };
