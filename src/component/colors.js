@@ -55,8 +55,11 @@ const COLORS = StyleSheet.create({
     placeholderTextColor: 'white',
   },
   TextColor1: {
-    borderColor: 'black',
+    // borderColor: 'black',
     textAlign: 'center',
+    borderRadius: 30,
+    // placeholderTextColor: 'white',
+    backgroundColor: 'gray',
     fontWeight: 'bold',
     fontSize: 25,
     borderWidth: 1,
@@ -68,7 +71,7 @@ const COLORS = StyleSheet.create({
 
   button: {
     alignItems: 'center',
-    backgroundColor: 'gray',
+
     padding: 10,
     borderRadius: 40,
     marginTop: 40,

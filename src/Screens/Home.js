@@ -11,7 +11,6 @@ const Home = ({navigation}) => {
     <SafeAreaView style={COLORS.login1}>
       <Text style={COLORS.HomeHeading}>Welcome to Home Page</Text>
       <Text>Email: {user.email}</Text>
-      {/* <Text>Password: {user.password}</Text> */}
       <Text>firstName: {user.firstName}</Text>
       <Text>Last Name: {user.lastName}</Text>
       <Text>mobileNumber: {user.mobileNumber}</Text>

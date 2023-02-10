@@ -1,181 +1,169 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   Text,
   View,
   ScrollView,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import COLORS from '../component/colors';
 import TextInputComp from '../component/TextInput';
 import {getUser} from '../redux/action/GetUser';
+import * as yup from 'yup';
+import {Formik} from 'formik';
+import Login from './Login';
 
-const RegistrationScreen = ({navigation}) => {
+const RegistrationValidationSchema = yup.object().shape({
+  FirstName: yup
+    .string()
+    .min(3, ({min}) => `Name must be ${min} characters`)
+    .required('Name is required')
+    .matches(/^[a-zA-Z ]{2,40}$/, 'must be characters'),
+  LastName: yup
+    .string()
+    .min(3, ({min}) => `Name must be ${min} characters`)
+    .required('Name is required')
+    .matches(/^[a-zA-Z ]{2,40}$/, 'must be characters'),
+  email: yup
+    .string()
+    .email('please Enter valid email')
+    .required('Email Address is required'),
+  password: yup
+    .string()
+    .min(8, ({min}) => `Password Must be in ${min} characters`)
+    .required('password is required')
+    .matches(
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,
+      'must contains upper,lower and special character',
+    ),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+  mobileNumber: yup
+    .string()
+    .min(10, ({min}) => `Mobile No. Must be ${min} characters`)
+    .required('MobileNo. is required')
+    .matches(/^[0]?[789]\d{9}$/, 'Wrong Formate Email'),
+});
+
+const Registration = ({navigation}) => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [checkValidPassword, setCheckValidPassword] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [checkValidFirstName, setCheckValidFirstName] = useState(false);
-  const [lastName, setLastName] = useState('');
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [checkValidMobileNo, setCheckValidMobileNo] = useState(false);
-  const [checkValidEmail, setCheckValidEmail] = useState(false);
 
-  const handleMobileNumber = text => {
-    let re = /^[0]?[789]\d{9}$/;
-    setMobileNumber(text);
-    if (re.test(text)) {
-      setCheckValidMobileNo(false);
-    } else {
-      setCheckValidMobileNo(true);
-    }
+  const userInfo = {
+    FirstName: '',
+    LastName: '',
+    Email: '',
+    password: '',
+    confirmPassword: '',
+    mobileNumber: '',
   };
 
-  const handleFirstName = text => {
-    let re = /^[a-zA-Z ]{3,14}$/;
-    setFirstName(text);
-    if (re.test(text)) {
-      setCheckValidFirstName(false);
-    } else {
-      setCheckValidFirstName(true);
-    }
-  };
-
-  const handleCheckEmail = text => {
-    let re = /\S+@\S+\.\S+/;
-    setEmail(text);
-    if (re.test(text)) {
-      setCheckValidEmail(false);
-    } else {
-      setCheckValidEmail(true);
-    }
-  };
-
-  const handleCheckPassword = text => {
-    let re = /^[a-z]+[A-Z]+[0-9]+[!@#$%^&]+]{8,16}$/;
-    setPassword(text);
-    if (re.test(text)) {
-      setCheckValidPassword(false);
-    } else {
-      setCheckValidPassword(true);
-    }
-  };
-
-  const Login1 = () => {
-    if (
-      email !== '' &&
-      password !== '' &&
-      confirmPassword !== '' &&
-      firstName !== '' &&
-      lastName !== '' &&
-      mobileNumber !== '' &&
-      checkValidPassword === false &&
-      checkValidFirstName === false &&
-      checkValidMobileNo === false &&
-      checkValidEmail === false
-    ) {
-      const data = {
-        email: email,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
-        mobileNumber: mobileNumber,
-      };
-      if (password !== confirmPassword) {
-        console.log(password);
-        console.log(confirmPassword);
-        Alert.alert('Password Not Matched');
-      } else {
-        navigation.navigate('Bottom');
-        dispatch(getUser(data));
-      }
-    } else {
-      Alert.alert('Please enter all details in Correct Formate');
-    }
+  const Login1 = values => {
+    const data = {
+      FirstName: values?.FirstName,
+      LastName: values?.LastName,
+      Email: values?.Email,
+      password: values?.password,
+      confirmPassword: values?.confirmPassword,
+      mobileNumber: values?.mobileNumber,
+    };
+    navigation.navigate('Bottom');
+    dispatch(getUser(data));
   };
   return (
     <SafeAreaView style={[COLORS.color1, COLORS.register1]}>
-      <ScrollView contentContainerStyle={COLORS.RegisterHeading}>
-        <Text style={[COLORS.color1, COLORS.register1]}>Register</Text>
-        <Text style={[COLORS.color1, COLORS.register2]}>
-          Enter your details for Register
-        </Text>
-        <View style={COLORS.content1}>
-          <TextInputComp
-            name="First Name"
-            placeHolder="Enter your First Name"
-            value={firstName}
-            onChangeText={a => handleFirstName(a)}
-          />
-          {checkValidFirstName && (
-            <Text style={COLORS.PasswordValidation}>
-              Name Must contain characters
+      <Formik
+        initialValues={userInfo}
+        validateOnMount={true}
+        onSubmit={values => Login1(values)}
+        validationSchema={RegistrationValidationSchema}>
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+
+          isValid,
+          /* and other goodies */
+        }) => (
+          <ScrollView contentContainerStyle={COLORS.RegisterHeading}>
+            <Text style={[COLORS.color1, COLORS.register1]}>Register</Text>
+            <Text style={[COLORS.color1, COLORS.register2]}>
+              Enter your details for Register
             </Text>
-          )}
-          <TextInputComp
-            name="Last Name"
-            placeHolder="Enter your Last Name"
-            value={lastName}
-            onChangeText={e => setLastName(e)}
-          />
-          {checkValidFirstName && (
-            <Text style={COLORS.PasswordValidation}>
-              Name Must contain characters
-            </Text>
-          )}
-          <TextInputComp
-            name="Email"
-            value={email}
-            placeHolder="Enter your Email Name"
-            onChangeText={text => handleCheckEmail(text)}
-          />
-          {/* {checkValidEmail && <Text style={{color: 'red'}}>Wrong Formate email</Text>} */}
-          {checkValidEmail && (
-            <Text style={COLORS.PasswordValidation}>Wrong Formate email</Text>
-          )}
-          <TextInputComp
-            secureTextEntry={true}
-            value={password}
-            name="Password"
-            placeHolder="Enter your Password"
-            onChangeText={e => handleCheckPassword(e)}
-          />
-          {checkValidPassword && (
-            <Text style={COLORS.PasswordValidation}>
-              Password must contain(Capital Letter,Small Letter, Number,special
-              Character)
-            </Text>
-          )}
-          <TextInputComp
-            secureTextEntry={true}
-            value={confirmPassword}
-            name="ConfirmPassword"
-            placeHolder="Enter your Password"
-            onChangeText={e => setConfirmPassword(e)}
-          />
-          <TextInputComp
-            name="Mobile Number"
-            placeHolder="Mobile Number"
-            value={mobileNumber}
-            onChangeText={text => handleMobileNumber(text)}
-          />
-          {checkValidMobileNo && (
-            <Text style={COLORS.PasswordValidation}>Incorrect Formate</Text>
-          )}
-          <TouchableOpacity onPress={Login1} style={COLORS.button}>
-            <Text>Submit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={COLORS.change}>Already account? Login</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+            <View style={COLORS.content1}>
+              <TextInputComp
+                name="FirstName"
+                value={values.FirstName}
+                placeHolder="Enter your FirstName "
+                onChangeText={handleChange('FirstName')}
+                error={errors.FirstName}
+                editable={true}
+              />
+
+              <TextInputComp
+                name="LastName"
+                value={values.LastName}
+                placeHolder="Enter your LastName"
+                onChangeText={handleChange('LastName')}
+                error={errors.LastName}
+                editable={true}
+              />
+
+              <TextInputComp
+                name="Email"
+                value={values.email}
+                placeHolder="Enter your Email Name"
+                onChangeText={handleChange('email')}
+                error={errors.email}
+                editable={true}
+              />
+              {/* {checkValidEmail && <Text style={{color: 'red'}}>Wrong Formate email</Text>} */}
+
+              <TextInputComp
+                name="password"
+                value={values.password}
+                placeHolder="Enter your password"
+                onChangeText={handleChange('password')}
+                error={errors.password}
+                editable={true}
+              />
+
+              <TextInputComp
+                name="confirmPassword"
+                value={values.confirmPassword}
+                placeHolder="Enter your confirmPassword "
+                onChangeText={handleChange('confirmPassword')}
+                error={errors.confirmPassword}
+                editable={true}
+              />
+              <TextInputComp
+                name="mobileNumber"
+                value={values.mobileNumber}
+                placeHolder="Enter your mobileNumber"
+                onChangeText={handleChange('mobileNumber')}
+                error={errors.mobileNumber}
+                editable={true}
+                keyboardType="numeric"
+              />
+              <TouchableOpacity
+                onPress={handleSubmit}
+                style={COLORS.button}
+                disabled={!isValid}>
+                <Text>Submit</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate(Login)}>
+                <Text style={COLORS.change}>Already account? Login</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        )}
+      </Formik>
     </SafeAreaView>
   );
 };
 
-export default RegistrationScreen;
+export default Registration;

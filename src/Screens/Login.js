@@ -1,15 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   Text,
   View,
   ScrollView,
-  TextInput,
   TouchableOpacity,
   Image,
   ImageBackground,
-  TextInputComponent,
 } from 'react-native';
 import COLORS from '../component/colors';
 import {useDispatch} from 'react-redux';
@@ -36,13 +34,10 @@ const LoginValidationSchema = yup.object().shape({
     ),
 });
 
-const Login = () => {
+const Login = ({}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [checkValidEmail, setCheckValidEmail] = useState(false);
-  // const [checkValidPassword, setCheckValidPassword] = useState(false);
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
   const userInfo = {
     email: '',
     password: '',
@@ -56,7 +51,13 @@ const Login = () => {
     navigation.navigate('Bottom');
     dispatch(getUser(data));
   };
-
+  const onPressEye = () => {
+    setSecureTextEntry(!secureTextEntry);
+  };
+  const Register = () => {
+    console.log('hello');
+    navigation.navigate('Registration');
+  };
   return (
     <>
       <Formik
@@ -90,42 +91,34 @@ const Login = () => {
                 <Text style={COLORS.register1}>Login</Text>
 
                 <View>
-                  <Text style={COLORS.login3}>Email-id</Text>
-                  <TextInput
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
+                  <TextInputComp
+                    name="Email"
                     value={values.email}
-                  />
-                  {errors.email && touched.email && (
-                    <Text style={{color: 'red', fontSize: 15}}>
-                      {errors.email}
-                    </Text>
-                  )}
-                  {/* <TextInputComponent
-                    onChangeText={handleChange('email')}
                     placeHolder="Enter your Email Name"
-                    onBlur={handleBlur('email')}
-                    value={values.email}
-                  /> */}
-                  <Text style={COLORS.login3}>Password</Text>
-                  <TextInput
-                    onChangeText={handleChange('password')}
-                    onBlur={handleBlur('password')}
-                    value={values.password}
-                    secureTextEntry
+                    onChangeText={handleChange('email')}
+                    error={errors.email}
+                    editable={true}
                   />
-                  {errors.password && touched.password && (
-                    <Text style={{color: 'red', fontSize: 15}}>
-                      {errors.password}
-                    </Text>
-                  )}
+                  <TextInputComp
+                    name="Password"
+                    value={values.password}
+                    placeHolder="Enter the password"
+                    onChangeText={handleChange('password')}
+                    error={errors.password}
+                    password={true}
+                    secureTextEntry={secureTextEntry}
+                    onPressEye={onPressEye}
+                  />
                   <TouchableOpacity
-                    style={COLORS.button}
-                    onPress={handleSubmit}>
+                    style={[
+                      COLORS.button,
+                      {backgroundColor: isValid ? 'blue' : 'gray'},
+                    ]}
+                    onPress={handleSubmit}
+                    disabled={!isValid}>
                     <Text style={COLORS.LoginButton}>Login</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate('RegistrationScreen')}>
+                  <TouchableOpacity onPress={Register}>
                     <Text style={COLORS.change}>New User? Register</Text>
                   </TouchableOpacity>
                 </View>
