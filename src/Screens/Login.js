@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  TextInputComponent,
 } from 'react-native';
 import COLORS from '../component/colors';
 import {useDispatch} from 'react-redux';
@@ -18,7 +19,6 @@ const image = {
 import * as yup from 'yup';
 import {Formik} from 'formik';
 import TextInputComp from '../component/TextInput';
-
 const LoginValidationSchema = yup.object().shape({
   email: yup
     .string()
